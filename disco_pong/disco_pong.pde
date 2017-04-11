@@ -5,6 +5,8 @@ float y=20;
 float speed=2;
 boolean up=false;
 boolean down=false;
+boolean up2=false;
+boolean down2=false;
 Paddle paddle1=new Paddle(w,h,x,y,speed);
 Paddle paddle2=new Paddle(20,100,760,20,2);
 
@@ -30,12 +32,12 @@ void keyPressed(){
    paddle1.movedown(down);
   }
     if(key=='l'){
-    up=true;
-   paddle2.moveup(up);
+    up2=true;
+   paddle2.moveup(up2);
   }
     if(key==','){
-    down=true;
-    paddle2.movedown(down);
+    down2=true;
+    paddle2.movedown(down2);
   }
   background(0);
 }
