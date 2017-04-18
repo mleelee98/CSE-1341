@@ -53,7 +53,6 @@ void draw() {
   fill(255);
 
   if (startState) {
-    background(0);
     fill(255);
     textSize(50);
     text("Welcome to Disco Pong!", 100, 200);
@@ -61,9 +60,6 @@ void draw() {
     text("Press any key to start", 230, 300);
   }
   if (!startState) {
-
-    background(backr, backg, backb);
-
     if (scor1>=3 || scor2>=3) {
       fill(a1, a2, a3);
       rect(0, 0, 400, 300);
@@ -111,6 +107,42 @@ void draw() {
         }
       }
     }
+    
+            if (scor1>=4 || scor2>=4) {
+      fill(a1, b2, d3);
+      rect(0, 0, 200, 150);
+      fill(b1, a2, c3);
+      rect(200, 0, 200, 150);
+      fill(c1, b2, a3);
+      rect(400, 0, 200, 150);
+      fill(a1, c2, d3);
+      rect(600, 0, 200, 150);
+      fill(b1, c2, a3);
+      rect(0, 150, 200, 150);
+      fill(c1, a2, d3);
+      rect(200, 150, 200, 150);
+      fill(a1, d2, b3);
+      rect(400, 150, 200, 150);
+      fill(b1, d2, c3);
+      rect(600, 150, 200, 150);
+      fill(a1, a2, a3);
+      rect(0, 300, 200, 150);
+      fill(b1, b2, b3);
+      rect(200, 300, 200, 150);
+      fill(c1, c2, c3);
+      rect(400, 300, 200, 150);
+      fill(d1, d2, d3);
+      rect(600, 300, 200, 150);
+      fill(c1, d2, b3);
+      rect(0, 450, 200, 150);
+      fill(d1, a2, c3);
+      rect(200, 450, 200, 150);
+      fill(b1, d2, a3);
+      rect(400, 450, 200, 150);
+      fill(a1, d2, a3);
+      rect(600, 450, 200, 150);
+    }
+
 
     fill(br, bg, bb);
     text("Disco Pong", 255, 320);
@@ -154,7 +186,6 @@ void draw() {
     //score board
     noStroke();
     fill(backr, backg, backb);
-    //rect(350, 40, 60, 20);
     textSize(30);
     fill(sr, sg, sb);
     text(scor1 + "   " + scor2, 360, 65);
@@ -194,16 +225,16 @@ void draw() {
     }
 
     if (scor1>=7) {
-      speed=0;
       background(0);
+      speed=0;
       fill(255);
       textSize(50);
       text("Player 1 won!", 230, 200);
     }
 
     if (scor2>=7) {
-      speed=0;
       background(0);
+      speed=0;
       fill(255);
       textSize(50);
       text("Player 2 won!", 230, 200);
@@ -219,5 +250,4 @@ void keyPressed() {
     paddle2.moveup('l');
     startState=false;
   }
-  background(0);
 }
