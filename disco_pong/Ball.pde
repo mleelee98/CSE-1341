@@ -89,6 +89,11 @@ void changexspeed(float newspeed){
   addx=newspeed;
 }
 
+void changexspeed(float newspeed, float newyspeed){
+  addx=newspeed;
+  addy=newyspeed;
+}
+
 void changer(float newr){
  ballr=newr; 
 }

@@ -1,3 +1,13 @@
+import ddf.minim.*;
+import ddf.minim.analysis.*;
+import ddf.minim.effects.*;
+import ddf.minim.signals.*;
+import ddf.minim.spi.*;
+import ddf.minim.ugens.*;
+
+Minim m;
+AudioPlayer bround;
+AudioPlayer hithit;
 float speed=20;
 float y=20;
 float addy=-3;
@@ -43,6 +53,9 @@ void setup() {
   size(800, 600);
 
   smooth();
+  m = new Minim(this);
+  bround = m.loadFile("Electro Cabello.mp3");
+  bround.play();
 }
 
 void draw() {
@@ -63,52 +76,31 @@ void draw() {
     if (scor1>=3 || scor2>=3) {
       fill(a1, a2, a3);
       rect(0, 0, 400, 300);
-      if (ball1.yposi()-10>paddle1.yposi()+20 && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
+      fill(b1, b2, b3);
+      rect(400, 0, 400, 300);
+      fill(c1, c2, c3);
+      rect(0, 300, 400, 300);
+      fill(d1, d2, d3);
+      rect(400, 300, 400, 300);
+      if (ball1.yposi()-10>paddle1.yposi() && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
         if (ball1.xposi()-10<40 || ball1.xposi()+10>760) {
           a1=(int)random(0, 255);
           a2=(int)random(0, 255);
           a3=(int)random(0, 255);
-        }
-      }
-    }
-
-    if (scor1>=3 || scor2>=3) {
-      fill(b1, b2, b3);
-      rect(400, 0, 400, 300);
-      if (ball1.yposi()-10>paddle1.yposi()+20 && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
-        if (ball1.xposi()-10<40 || ball1.xposi()+10>760) {
           b1=(int)random(0, 255);
           b2=(int)random(0, 255);
           b3=(int)random(0, 255);
-        }
-      }
-    }
-
-    if (scor1>=3 || scor2>=3) {
-      fill(c1, c2, c3);
-      rect(0, 300, 400, 300);
-      if (ball1.yposi()-10>paddle1.yposi()+20 && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
-        if (ball1.xposi()-10<40 || ball1.xposi()+10>760) {
           c1=(int)random(0, 255);
           c2=(int)random(0, 255);
           c3=(int)random(0, 255);
-        }
-      }
-    }
-
-    if (scor1>=3 || scor2>=3) {
-      fill(d1, d2, d3);
-      rect(400, 300, 400, 300);
-      if (ball1.yposi()-10>paddle1.yposi()+20 && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
-        if (ball1.xposi()-10<40 || ball1.xposi()+10>760) {
           d1=(int)random(0, 255);
           d2=(int)random(0, 255);
           d3=(int)random(0, 255);
         }
       }
     }
-    
-            if (scor1>=4 || scor2>=4) {
+
+    if (scor1>=4 || scor2>=4) {
       fill(a1, b2, d3);
       rect(0, 0, 200, 150);
       fill(b1, a2, c3);
@@ -156,6 +148,9 @@ void draw() {
     if (ball1.yposi()-10>paddle1.yposi() && ball1.yposi()-10<paddle1.yposi()+200) {
       if (ball1.xposi()-10<40) {
         ball1.changexspeed(addx);
+          hithit = m.loadFile("Metallic_Clank.mp3");
+          hithit.play();
+        
       }
     }
 
@@ -163,6 +158,9 @@ void draw() {
     if (ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
       if (ball1.xposi()+10>760) {
         ball1.changexspeed(-addx);
+          hithit = m.loadFile("Metallic_Clank.mp3");
+          hithit.play();
+        
       }
     }
 
@@ -249,5 +247,14 @@ void keyPressed() {
     paddle2.movedown(',');
     paddle2.moveup('l');
     startState=false;
+    if(key=='e'){
+      ball1.changexspeed(-1,2);
+    }
+   if(key=='r'){
+      ball1.changexspeed(-3,5);
+    }
+   if(key=='t'){
+      ball1.changexspeed(-5,7);
+    }
   }
 }
