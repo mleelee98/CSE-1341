@@ -11,6 +11,7 @@ class Ball{
   float ballr=250;
   float ballg=250;
   float ballb=250;
+  boolean hh=false;
   
   Ball(){
     
@@ -30,6 +31,11 @@ class Ball{
   void create(){
     fill(ballr, ballg, ballb);
     ellipse(x,y,radius,radius);
+  }
+  
+  void drawcreate(){
+   fill(ballr, ballg, ballb);
+   ellipse(x,y,radius,radius);
   }
   
 boolean topCollision(float ycoor) {
@@ -104,6 +110,13 @@ void changeg(float newg){
 
 void changeb(float newb){
  ballb=newb; 
+}
+
+boolean hasHit(float xx, float yy){
+  if(x-10>=xx && y-10>=yy && x+10<=x+70 && y+10<x+47){
+    hh=true;
+  }
+  return hh;
 }
 
 

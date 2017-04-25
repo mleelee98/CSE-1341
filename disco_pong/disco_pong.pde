@@ -49,6 +49,14 @@ LeftPaddle paddle1=new LeftPaddle();
 RightPaddle paddle2=new RightPaddle(20, 200, 760, y, speed, pr, pg, pb);
 Ball ball1=new Ball(400, 300, 20, addx, addy, ballr, ballg, ballb);
 
+ArrayList<Power> powers = new ArrayList<Power>();
+long minSpawnTime = 500;
+long maxSpawnTime = 550;
+long nextSpawnTime = round(random(minSpawnTime, maxSpawnTime));
+float mSize = 30;
+
+ArrayList<Ball> moreballs= new ArrayList<Ball>();
+
 void setup() {
   size(800, 600);
 
@@ -59,7 +67,6 @@ void setup() {
 }
 
 void draw() {
-
   background(backr, backg, backb);
   disco= loadFont("Phosphate-Inline-48.vlw");
   textFont(disco);
@@ -73,6 +80,7 @@ void draw() {
     text("Press any key to start", 230, 300);
   }
   if (!startState) {
+    
     if (scor1>=3 || scor2>=3) {
       fill(a1, a2, a3);
       rect(0, 0, 400, 300);
@@ -134,7 +142,6 @@ void draw() {
       fill(a1, d2, a3);
       rect(600, 450, 200, 150);
     }
-
 
     fill(br, bg, bb);
     text("Disco Pong", 255, 320);
@@ -220,6 +227,7 @@ void draw() {
           backb=(int)random(0, 255);
         }
       }
+          
     }
 
     if (scor1>=7) {
@@ -237,6 +245,35 @@ void draw() {
       textSize(50);
       text("Player 2 won!", 230, 200);
     }
+    
+    
+        if(scor1>=1 || scor2>=1){
+      
+    for(int k=5; k>=0; k--){
+      moreballs.add(new Ball());
+    }
+      
+      if (millis() > nextSpawnTime) {
+    long lower = round(minSpawnTime);
+    long upper = round(maxSpawnTime);
+    nextSpawnTime = nextSpawnTime + round(random(lower, upper));
+
+    powers.add(new Power());
+  }
+  
+  for (int i=powers.size()-1; i>=0; i--) {
+    powers.get(i).drawShape();
+    powers.get(i).move();
+    if (ball1.hasHit(powers.get(i).x,powers.get(i).y)) {
+      powers.remove(i);
+      for(int j=moreballs.size()-1; j>=0; j--){
+        moreballs.get(j).drawcreate();
+        moreballs.get(j).move();
+      }
+    }
+  }
+    }
+
   }
 }
 
@@ -247,14 +284,5 @@ void keyPressed() {
     paddle2.movedown(',');
     paddle2.moveup('l');
     startState=false;
-    if(key=='e'){
-      ball1.changexspeed(-1,2);
-    }
-   if(key=='r'){
-      ball1.changexspeed(-3,5);
-    }
-   if(key=='t'){
-      ball1.changexspeed(-5,7);
-    }
   }
 }
