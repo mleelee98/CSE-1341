@@ -48,14 +48,10 @@ boolean hit=false;
 LeftPaddle paddle1=new LeftPaddle();
 RightPaddle paddle2=new RightPaddle(20, 200, 760, y, speed, pr, pg, pb);
 Ball ball1=new Ball(400, 300, 20, addx, addy, ballr, ballg, ballb);
+PImage myImg;
 
-ArrayList<Power> powers = new ArrayList<Power>();
-long minSpawnTime = 500;
-long maxSpawnTime = 550;
-long nextSpawnTime = round(random(minSpawnTime, maxSpawnTime));
-float mSize = 30;
-
-ArrayList<Ball> moreballs= new ArrayList<Ball>();
+Shape [] shapes= new Shape[20];
+Shape [] shapes1= new Shape[20];
 
 void setup() {
   size(800, 600);
@@ -64,6 +60,15 @@ void setup() {
   m = new Minim(this);
   bround = m.loadFile("Electro Cabello.mp3");
   bround.play();
+
+  for (int i = 0; i< shapes.length; i++) {
+    shapes[i] = new Power();
+    shapes[i].setLocation(random(0, width), height/2);
+    shapes1[i] = new P2();
+    shapes1[i].setLocation(random(0, width), height/2);
+  }
+
+  myImg = loadImage("discoball.png");
 }
 
 void draw() {
@@ -80,7 +85,7 @@ void draw() {
     text("Press any key to start", 230, 300);
   }
   if (!startState) {
-    
+
     if (scor1>=3 || scor2>=3) {
       fill(a1, a2, a3);
       rect(0, 0, 400, 300);
@@ -146,6 +151,20 @@ void draw() {
     fill(br, bg, bb);
     text("Disco Pong", 255, 320);
 
+    if (scor1>=5 || scor2>=5) {
+      for (int i = 0; i< shapes.length; i++) {
+        shapes[i].display();
+        shapes[i].update();
+      }
+    }
+
+    if (scor1>=6 || scor2>=6) {
+      for (int i = 0; i< shapes.length; i++) {
+        shapes1[i].display();
+        shapes1[i].update();
+      }
+    }
+
     paddle1.create();
     paddle2.create();
     ball1.create();
@@ -155,9 +174,8 @@ void draw() {
     if (ball1.yposi()-10>paddle1.yposi() && ball1.yposi()-10<paddle1.yposi()+200) {
       if (ball1.xposi()-10<40) {
         ball1.changexspeed(addx);
-          hithit = m.loadFile("Metallic_Clank.mp3");
-          hithit.play();
-        
+        hithit = m.loadFile("Metallic_Clank.mp3");
+        hithit.play();
       }
     }
 
@@ -165,9 +183,8 @@ void draw() {
     if (ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
       if (ball1.xposi()+10>760) {
         ball1.changexspeed(-addx);
-          hithit = m.loadFile("Metallic_Clank.mp3");
-          hithit.play();
-        
+        hithit = m.loadFile("Metallic_Clank.mp3");
+        hithit.play();
       }
     }
 
@@ -184,8 +201,6 @@ void draw() {
       ball1.setxposi(random(340, 300));
     }
 
-    PImage myImg = loadImage("discoball.png");
-    myImg.loadPixels();
     image(myImg, 340, 5);
 
     //score board
@@ -219,7 +234,7 @@ void draw() {
       }
     }
 
-    if (scor1>=2 || scor2>=2) {
+    if (scor1==2 || scor2==2) {
       if (ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200 || ball1.yposi()+10>paddle1.yposi() && ball1.yposi()+10<paddle1.yposi()+200) {
         if (ball1.xposi()+10>760 || ball1.xposi()-10<40) {
           backr=(int)random(0, 255);
@@ -227,7 +242,6 @@ void draw() {
           backb=(int)random(0, 255);
         }
       }
-          
     }
 
     if (scor1>=7) {
@@ -245,35 +259,6 @@ void draw() {
       textSize(50);
       text("Player 2 won!", 230, 200);
     }
-    
-    
-        if(scor1>=1 || scor2>=1){
-      
-    for(int k=5; k>=0; k--){
-      moreballs.add(new Ball());
-    }
-      
-      if (millis() > nextSpawnTime) {
-    long lower = round(minSpawnTime);
-    long upper = round(maxSpawnTime);
-    nextSpawnTime = nextSpawnTime + round(random(lower, upper));
-
-    powers.add(new Power());
-  }
-  
-  for (int i=powers.size()-1; i>=0; i--) {
-    powers.get(i).drawShape();
-    powers.get(i).move();
-    if (ball1.hasHit(powers.get(i).x,powers.get(i).y)) {
-      powers.remove(i);
-      for(int j=moreballs.size()-1; j>=0; j--){
-        moreballs.get(j).drawcreate();
-        moreballs.get(j).move();
-      }
-    }
-  }
-    }
-
   }
 }
 
