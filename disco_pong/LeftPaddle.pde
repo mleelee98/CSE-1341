@@ -1,3 +1,6 @@
+//Code by Monica Lee
+//Code based off of lecture examples by Donya Quick
+
 class LeftPaddle{
   float w=20;
   float h=200;

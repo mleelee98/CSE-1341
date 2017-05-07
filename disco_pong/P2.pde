@@ -1,7 +1,7 @@
 //Code by Monica Lee
 //Code based off of lecture examples by Donya Quick
 
-class Power implements Shape {
+class P2 implements Shape {
   float x=-100;
   float y=-100;
   float aSize = 80;
@@ -30,13 +30,13 @@ class Power implements Shape {
     }
   }
   
-  Power() {
+  P2() {
     x = width+100;
     y = random(0,height);
     aSize = random(5,80);
     xSpeed = random(-5,-3);
 
-    img=loadImage("casette.png");
+    img=loadImage("vinyl.png");
   }
-
+  
 }

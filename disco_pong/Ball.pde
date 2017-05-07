@@ -1,3 +1,6 @@
+//Code by Monica Lee
+//Code based off of lecture examples by Donya Quick
+
 class Ball{
   float x=400;
   float y=300;
@@ -72,7 +75,6 @@ boolean bottomCollision(float ycoor) {
   if (!rightCollision) {
     addx= -addx;
   }
-  
 }
 
 float xposi(){

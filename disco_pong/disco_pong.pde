@@ -1,3 +1,8 @@
+//Code by Monica Lee
+//Code based off of lecture examples by Donya Quick
+//Music by Kevin MacLeod
+//Sound effects from Youtube sound effects library
+
 import ddf.minim.*;
 import ddf.minim.analysis.*;
 import ddf.minim.effects.*;
@@ -45,6 +50,7 @@ float d1=(int)random(0, 255);
 float d2=(int)random(0, 255);
 float d3=(int)random(0, 255);
 boolean hit=false;
+boolean playagain=false;
 LeftPaddle paddle1=new LeftPaddle();
 RightPaddle paddle2=new RightPaddle(20, 200, 760, y, speed, pr, pg, pb);
 Ball ball1=new Ball(400, 300, 20, addx, addy, ballr, ballg, ballb);
@@ -170,7 +176,6 @@ void draw() {
     ball1.create();
     ball1.move();
 
-    //bounce left paddle
     if (ball1.yposi()-10>paddle1.yposi() && ball1.yposi()-10<paddle1.yposi()+200) {
       if (ball1.xposi()-10<40) {
         ball1.changexspeed(addx);
@@ -179,7 +184,6 @@ void draw() {
       }
     }
 
-    //bounce right paddle
     if (ball1.yposi()+10>paddle2.yposi() && ball1.yposi()+10<paddle2.yposi()+200) {
       if (ball1.xposi()+10>760) {
         ball1.changexspeed(-addx);
@@ -188,7 +192,6 @@ void draw() {
       }
     }
 
-    //set score
     if (ball1.xposi()<0) {
       scor2++;
     }
@@ -196,22 +199,18 @@ void draw() {
       scor1++;
     }
 
-    //reset game
     if (ball1.xposi()<0 || ball1.xposi()>800) {
       ball1.setxposi(random(340, 300));
     }
 
     image(myImg, 340, 5);
 
-    //score board
     noStroke();
     fill(backr, backg, backb);
     textSize(30);
     fill(sr, sg, sb);
     text(scor1 + "   " + scor2, 360, 65);
 
-
-    //point 1
     if (scor1>=1 || scor2>=1) {
       if (ball1.yposi()-10>paddle1.yposi() && ball1.yposi()-10<paddle1.yposi()+200 || ball1.yposi()-10>paddle2.yposi() && ball1.yposi()-10<paddle2.yposi()+200) {
         if (ball1.xposi()-10<40 || ball1.xposi()+10>760) {
@@ -250,6 +249,8 @@ void draw() {
       fill(255);
       textSize(50);
       text("Player 1 won!", 230, 200);
+      textSize(40);
+      text("Press any key to play again", 130, 260);
     }
 
     if (scor2>=7) {
@@ -258,6 +259,34 @@ void draw() {
       fill(255);
       textSize(50);
       text("Player 2 won!", 230, 200);
+      textSize(40);
+      text("Press any key to play again", 130, 260);
+    }
+
+    if (scor1>=7 || scor2>=7) {
+      playagain=true;
+    }
+
+    if (playagain==true && keyPressed==true) {
+      scor1=0;
+      scor2=0;
+      playagain=false;
+      background(255);
+      ball1.changer(255);
+      ball1.changeg(255);
+      ball1.changeb(255);
+      paddle1.changer(255);
+      paddle1.changeg(255);
+      paddle1.changeb(255);
+      paddle2.changer(255);
+      paddle2.changeg(255);
+      paddle2.changeb(255);
+      br=255;
+      bg=255;
+      bb=255;
+      sr=255;
+      sg=255;
+      sb=255;
     }
   }
 }
